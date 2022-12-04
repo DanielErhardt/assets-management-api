@@ -1,0 +1,44 @@
+{
+  "scripts": {
+    "start": "node .",
+    "dev": "tsnd --respawn ./src/server.ts",
+    "build": "rm -rf dist && npx tsc",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "test:coverage": "nyc npm run test",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "restart": "npm run build && npm run db:reset && npm run dev",
+    "compose:up": "docker-compose up -d --build",
+    "compose:down": "docker-compose down --remove-orphans",
+    "compose:up:dev": "docker-compose -f docker-compose.dev.yml up -d --build --force-recreate",
+    "compose:down:dev": "docker-compose -f docker-compose.dev.yml down --remove-orphans",
+    "logs": "docker-compose logs -f",
+    "logs:dev": "docker-compose -f docker-compose.dev.yml logs -f"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.5",
+    "zod": "^3.19.1"
+  }
+}
