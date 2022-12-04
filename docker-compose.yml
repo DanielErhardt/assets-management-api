@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  mongo-express:
+    image: mongo-express
+    platform: linux/x86_64
+    container_name: MongoExpress
+    restart: always
+    ports:
+      - ${ME_LOCAL_PORT}:8081
+    environment:
+      ME_CONFIG_MONGODB_PORT: ${DB_LOCAL_PORT}
+      ME_CONFIG_MONGODB_SERVER: mongo-db
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
+      ME_CONFIG_BASICAUTH_USERNAME: ${ME_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
+    links:
+      - mongo-db
+    networks:
+      - mongo-express_net
+
+  mongo-db:
+    image: mongo
+    platform: linux/x86_64
+    container_name: MongoDB
+    ports:
+      - ${DB_LOCAL_PORT}:27017
+    volumes:
+      - ./mongo_volume:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+    networks:
+      - mongo-express_net
+
+networks:
+  mongo-express_net:
+    name: mongo-express_net
+    driver: bridge
