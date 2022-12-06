@@ -4,9 +4,9 @@ import { assetZodType } from './Asset';
 import { companyZodType } from './Company';
 
 export const unitZodType = entityZodType.extend({
-  name: z.string().min(3),
+  name: z.string(),
   assets: z.union([z.string(), z.array(assetZodType)]),
   company: z.union([z.string(), companyZodType]),
-});
+}).strict();
 
 export type Unit = z.infer<typeof unitZodType>;

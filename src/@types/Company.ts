@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { entityZodType } from './Entity';
 
 export const companyZodType = entityZodType.extend({
-  name: z.string().min(3),
-});
+  name: z.string(),
+}).strict();
 
 export type Company = z.infer<typeof companyZodType>;
