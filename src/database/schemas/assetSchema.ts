@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { Asset } from '../../@types/Asset';
+import { Asset } from '../../@types/Entities/Asset';
 
 const assetSchema = new Schema<Asset>({
   name: {

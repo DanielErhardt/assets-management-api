@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { Unit } from '../../@types/Unit';
+import { Unit } from '../../@types/Entities/Unit';
 
 const unitSchema = new Schema<Unit>({
   name: {

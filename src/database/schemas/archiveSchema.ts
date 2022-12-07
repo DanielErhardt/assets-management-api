@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { Archive } from '../../@types/Archive';
+import { Archive } from '../../@types/Entities/Archive';
 
 const archiveSchema = new Schema<Archive>({
   collectionName: {
