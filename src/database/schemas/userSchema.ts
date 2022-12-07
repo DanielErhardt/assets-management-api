@@ -1,7 +1,11 @@
-import { Schema } from 'mongoose';
+import { ObjectId, Schema } from 'mongoose';
 import { User } from '../../@types/Entities/User';
 
-const userSchema = new Schema<User>({
+type SchemaCompatibleUser = Omit<User, 'company'> & {
+  company: ObjectId;
+};
+
+const userSchema = new Schema<SchemaCompatibleUser>({
   name: {
     type: String,
     required: [true, 'User name is required.'],
@@ -26,6 +30,6 @@ const userSchema = new Schema<User>({
     ref: 'Company',
     required: [true, 'User\'s company Id must be assigned.'],
   },
-}, { toObject: { getters: true } });
+});
 
 export default userSchema;

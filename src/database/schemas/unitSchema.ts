@@ -1,7 +1,12 @@
-import { Schema } from 'mongoose';
+import { ObjectId, Schema } from 'mongoose';
 import { Unit } from '../../@types/Entities/Unit';
 
-const unitSchema = new Schema<Unit>({
+type SchemaCompatibleUnit = Omit<Unit, 'owner' | 'assets'> & {
+  assets: ObjectId[];
+  owner: ObjectId;
+};
+
+const unitSchema = new Schema<SchemaCompatibleUnit>({
   name: {
     type: String,
     required: [true, 'Unit name field is required.'],
@@ -11,11 +16,11 @@ const unitSchema = new Schema<Unit>({
     ref: 'Asset',
     required: [true, 'Unit assets field is required.'],
   }],
-  company: {
+  owner: {
     type: Schema.Types.ObjectId,
     ref: 'Company',
-    required: [true, 'Unit companyId field is required .'],
+    required: [true, 'Unit company field is required .'],
   },
-}, { toObject: { getters: true } });
+});
 
 export default unitSchema;

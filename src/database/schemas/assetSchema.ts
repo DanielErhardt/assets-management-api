@@ -1,7 +1,11 @@
-import { Schema } from 'mongoose';
+import { ObjectId, Schema } from 'mongoose';
 import { Asset } from '../../@types/Entities/Asset';
 
-const assetSchema = new Schema<Asset>({
+type SchemaCompatibleAsset = Omit<Asset, 'owner'> & {
+  owner: ObjectId;
+};
+
+const assetSchema = new Schema<SchemaCompatibleAsset>({
   name: {
     type: String,
     require: [true, 'Asset name field is required.'],
@@ -35,6 +39,6 @@ const assetSchema = new Schema<Asset>({
     min: [0, 'Asset health level cannot be lower than 0. Got {VALUE}.'],
     max: [100, 'Asset health level cannot be higher than 100. Got {VALUE}.'],
   },
-}, { toObject: { getters: true } });
+});
 
 export default assetSchema;
