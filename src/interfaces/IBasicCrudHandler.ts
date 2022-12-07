@@ -1,7 +1,7 @@
 import { ICreateOneHandler } from './CRUD Handlers/ICreateOneHandler';
 import { IDeleteOneHandler } from './CRUD Handlers/IDeleteOneHandler';
-import { IReadAllHandler } from './CRUD Handlers/IReadAllHandler';
-import { IReadOneHandler } from './CRUD Handlers/IReadOneHandler';
+import { IFindAllHandler } from './CRUD Handlers/IFindAllHandler';
+import { IFindByIdHandler } from './CRUD Handlers/IFindByIdHandler';
 import { IUpdateOneHandler } from './CRUD Handlers/IUpdateOneHandler';
 
 /**
@@ -9,7 +9,7 @@ import { IUpdateOneHandler } from './CRUD Handlers/IUpdateOneHandler';
  */
 export interface IBasicCrudHandler<T> extends
   ICreateOneHandler<T>,
-  IReadOneHandler<T>,
-  IReadAllHandler<T>,
+  IFindByIdHandler<T>,
+  IFindAllHandler<T>,
   IUpdateOneHandler<T>,
   IDeleteOneHandler<T> {}
