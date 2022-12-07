@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { companyZodType } from './Company';
 import { entityZodType } from './Entity';
 
 export const userZodType = entityZodType.extend({
@@ -7,7 +6,7 @@ export const userZodType = entityZodType.extend({
   email: z.string().email(),
   password: z.string().optional(),
   role: z.enum(['user', 'manager', 'admin']),
-  company: z.union([z.string(), companyZodType]),
+  company: z.string(),
 }).strict();
 
 export type User = z.infer<typeof userZodType>;

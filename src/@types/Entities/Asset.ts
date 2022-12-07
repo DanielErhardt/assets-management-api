@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { companyZodType } from './Company';
 import { entityZodType } from './Entity';
 
 export const assetZodType = entityZodType.extend({
@@ -7,7 +6,7 @@ export const assetZodType = entityZodType.extend({
   image: z.string().url(),
   description: z.string(),
   model: z.string(),
-  owner: z.union([z.string(), companyZodType]),
+  owner: z.string(),
   status: z.enum(['Running', 'Alerting', 'Stopped']),
   health: z.number().min(0).max(100),
 }).strict();
