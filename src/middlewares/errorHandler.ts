@@ -3,7 +3,8 @@ import codes from 'http-status-codes';
 import { ZodError } from 'zod';
 import RequestError from '../utils/RequestError';
 
-const errorHandler: ErrorRequestHandler = (error, _req, res) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
   if (error instanceof RequestError) {
     const { statusCode, message } = error;
     return res.status(statusCode).json({ message });
