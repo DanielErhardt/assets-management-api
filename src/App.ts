@@ -2,6 +2,10 @@ import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
 import errorHandler from './middlewares/errorHandler';
+import usersRouter from './routers/usersRouter';
+import companiesRouter from './routers/companiesRouter';
+import assetsRouter from './routers/assetsRouter';
+import unitsRouter from './routers/unitsRouter';
 
 class App {
   private _port: string;
@@ -19,6 +23,11 @@ class App {
   private async config(): Promise<void> {
     this._instance.use(express.json());
     this._instance.use(cors());
+
+    this._instance.use('/users', usersRouter);
+    this._instance.use('/companies', companiesRouter);
+    this._instance.use('/assets', assetsRouter);
+    this._instance.use('/units', unitsRouter);
 
     this._instance.use(errorHandler);
   }
