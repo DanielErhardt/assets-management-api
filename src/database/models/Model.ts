@@ -62,6 +62,11 @@ abstract class Model<T extends Entity> implements IBasicCrudHandler<T> {
 
     return deleted as T;
   }
+
+  async seed(objects: T[], reset = true): Promise<void> {
+    if (reset) await this._model.deleteMany();
+    await this._model.insertMany(objects);
+  }
 }
 
 export default Model;
