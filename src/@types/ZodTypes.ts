@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export const userRoleZodType = z.enum(['user', 'manager', 'admin']);
+
 export const assetStatusZodType = z.enum(['Running', 'Alerting', 'Stopped']);
 
 export const assetHealthZodType = z.number().min(0).max(100);
