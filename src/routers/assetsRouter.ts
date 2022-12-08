@@ -1,25 +1,26 @@
 import { Router } from 'express';
+import AssetController from '../controllers/AssetController';
 
 const assetsRouter = Router();
 
-assetsRouter.post('/');
+const controller = new AssetController();
 
-assetsRouter.get('/');
+assetsRouter.post('/', controller.create);
 
-assetsRouter.get('/status/:id');
+assetsRouter.get('/', controller.findAll);
 
-assetsRouter.get('/health/:id');
+assetsRouter.get('/:id/status', controller.getStatus);
 
-assetsRouter.get('/:id');
+assetsRouter.get('/:id/health', controller.getHealth);
 
-assetsRouter.put('/:id');
+assetsRouter.get('/:id', controller.findById);
 
-assetsRouter.patch('/updateHealth/:id/:health');
+assetsRouter.put('/:id', controller.updateOne);
 
-assetsRouter.patch('/start/:id');
+assetsRouter.patch('/:id/health/:newHealth', controller.setHealth);
 
-assetsRouter.patch('/stop/:id');
+assetsRouter.patch('/:id/status/:newStatus', controller.setStatus);
 
-assetsRouter.delete('/:id');
+assetsRouter.delete('/:id', controller.deleteOne);
 
 export default assetsRouter;
