@@ -7,4 +7,6 @@ const {
 
 const MONGO_URI = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_LOCAL_PORT}/${DB_NAME}?authSource=admin`;
 
-export const connect = (mongoURI = MONGO_URI) => mongoose.connect(mongoURI);
+export const connect = async (mongoURI = MONGO_URI) => mongoose.connect(mongoURI);
+
+export const disconnect = async () => mongoose.connection.close();
