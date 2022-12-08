@@ -1,19 +1,12 @@
 {
   "scripts": {
-    "start": "node .",
-    "dev": "tsnd --respawn ./src/server.ts",
-    "build": "rm -rf dist && npx tsc",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "start": "tsnd --respawn ./src/server.ts",
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
     "test:coverage": "nyc npm run test",
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "restart": "npm run build && npm run db:reset && npm run dev",
+    "db:seed": "ts-node -e 'import seed from \"./src/database/seeders\"; seed();'",
     "compose:up": "docker-compose up -d --build",
     "compose:down": "docker-compose down --remove-orphans",
-    "compose:up:dev": "docker-compose -f docker-compose.dev.yml up -d --build --force-recreate",
-    "compose:down:dev": "docker-compose -f docker-compose.dev.yml down --remove-orphans",
-    "logs": "docker-compose logs -f",
-    "logs:dev": "docker-compose -f docker-compose.dev.yml logs -f"
+    "logs": "docker-compose logs -f"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
