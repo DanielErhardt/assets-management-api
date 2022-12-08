@@ -1,22 +1,24 @@
 import { Router } from 'express';
 import UserController from '../controllers/UserController';
+import auth from '../middlewares/authentication';
+import val from '../middlewares/validators';
 
 const usersRouter = Router();
 
 const controller = new UserController();
 
-usersRouter.post('/login', controller.login);
+usersRouter.post('/login', val.login, controller.login);
 
-usersRouter.post('/', controller.create);
+usersRouter.post('/', auth.admin, val.newUser, controller.create);
 
-usersRouter.get('/', controller.findAll);
+usersRouter.get('/', auth.manager, controller.findAll);
 
-usersRouter.get('/:id', controller.findById);
+usersRouter.get('/:id', auth.manager, controller.findById);
 
-usersRouter.patch('/:id/role/:newRole', controller.assignRole);
+usersRouter.patch('/:id/role/:newRole', auth.manager, controller.assignRole);
 
-usersRouter.put('/:id', controller.updateOne);
+usersRouter.put('/:id', auth.manager, controller.updateOne);
 
-usersRouter.delete('/:id', controller.deleteOne);
+usersRouter.delete('/:id', auth.admin, controller.deleteOne);
 
 export default usersRouter;

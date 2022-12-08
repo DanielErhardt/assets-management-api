@@ -1,36 +1,38 @@
 import { Router } from 'express';
 import CompanyController from '../controllers/CompanyController';
+import auth from '../middlewares/authentication';
+import val from '../middlewares/validators';
 
 const companiesRouter = Router();
 
 const controller = new CompanyController();
 
-companiesRouter.post('/', controller.create);
+companiesRouter.post('/', auth.admin, val.newCompany, controller.create);
 
-companiesRouter.get('/', controller.findAll);
+companiesRouter.get('/', auth.admin, controller.findAll);
 
-companiesRouter.get('/:id/employees', controller.getEmployees);
+companiesRouter.get('/employees', auth.manager, controller.getEmployees);
 
-companiesRouter.get('/:id/assets', controller.getAssets);
+companiesRouter.get('/assets', auth.manager, controller.getAssets);
 
-companiesRouter.get('/:id/units', controller.getUnits);
+companiesRouter.get('/units', auth.manager, controller.getUnits);
 
-companiesRouter.get('/:id', controller.findById);
+companiesRouter.get('/:id', auth.admin, controller.findById);
 
-companiesRouter.patch('/:id/employees/add/:employeeId', controller.addEmployee);
+companiesRouter.patch('/employees/add/:employeeId', auth.manager, controller.addEmployee);
 
-companiesRouter.patch('/:id/employees/remove/:employeeId', controller.removeEmployee);
+companiesRouter.patch('/employees/remove/:employeeId', auth.manager, controller.removeEmployee);
 
-companiesRouter.patch('/:id/assets/add/:assetId', controller.addAsset);
+companiesRouter.patch('/assets/add/:assetId', auth.manager, controller.addAsset);
 
-companiesRouter.patch('/:id/assets/remove/:assetId', controller.removeAsset);
+companiesRouter.patch('/assets/remove/:assetId', auth.manager, controller.removeAsset);
 
-companiesRouter.patch('/:id/units/add/:unitId', controller.addUnit);
+companiesRouter.patch('/units/add/:unitId', auth.manager, controller.addUnit);
 
-companiesRouter.patch('/:id/units/remove/:unitId', controller.removeUnit);
+companiesRouter.patch('/units/remove/:unitId', auth.manager, controller.removeUnit);
 
-companiesRouter.put('/:id', controller.updateOne);
+companiesRouter.put('/:id', auth.admin, controller.updateOne);
 
-companiesRouter.delete('/:id', controller.deleteOne);
+companiesRouter.delete('/:id', auth.admin, controller.deleteOne);
 
 export default companiesRouter;

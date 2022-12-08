@@ -1,26 +1,28 @@
 import { Router } from 'express';
 import AssetController from '../controllers/AssetController';
+import auth from '../middlewares/authentication';
+import val from '../middlewares/validators';
 
 const assetsRouter = Router();
 
 const controller = new AssetController();
 
-assetsRouter.post('/', controller.create);
+assetsRouter.post('/', auth.manager, val.newAsset, controller.create);
 
-assetsRouter.get('/', controller.findAll);
+assetsRouter.get('/', auth.user, controller.findAll);
 
-assetsRouter.get('/:id/status', controller.getStatus);
+assetsRouter.get('/:id/status', auth.user, controller.getStatus);
 
-assetsRouter.get('/:id/health', controller.getHealth);
+assetsRouter.get('/:id/health', auth.user, controller.getHealth);
 
-assetsRouter.get('/:id', controller.findById);
+assetsRouter.get('/:id', auth.user, controller.findById);
 
-assetsRouter.put('/:id', controller.updateOne);
+assetsRouter.put('/:id', auth.manager, controller.updateOne);
 
-assetsRouter.patch('/:id/health/:newHealth', controller.setHealth);
+assetsRouter.patch('/:id/health/:newHealth', auth.user, val.assetHealth, controller.setHealth);
 
-assetsRouter.patch('/:id/status/:newStatus', controller.setStatus);
+assetsRouter.patch('/:id/status/:newStatus', auth.user, val.assetStatus, controller.setStatus);
 
-assetsRouter.delete('/:id', controller.deleteOne);
+assetsRouter.delete('/:id', auth.manager, controller.deleteOne);
 
 export default assetsRouter;
