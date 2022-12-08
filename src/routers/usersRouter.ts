@@ -1,19 +1,22 @@
 import { Router } from 'express';
+import UserController from '../controllers/UserController';
 
 const usersRouter = Router();
 
-usersRouter.post('/login');
+const controller = new UserController();
 
-usersRouter.post('/');
+usersRouter.post('/login', controller.login);
 
-usersRouter.get('/');
+usersRouter.post('/', controller.create);
 
-usersRouter.get('/:id');
+usersRouter.get('/', controller.findAll);
 
-usersRouter.put('/:id');
+usersRouter.get('/:id', controller.findById);
 
-usersRouter.patch('/resetPassword/:id');
+usersRouter.patch('/:id/role/:newRole', controller.assignRole);
 
-usersRouter.delete('/:id');
+usersRouter.put('/:id', controller.updateOne);
+
+usersRouter.delete('/:id', controller.deleteOne);
 
 export default usersRouter;
