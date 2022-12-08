@@ -6,5 +6,5 @@ export interface IUpdateOneHandler<T> {
    * @param values Partial object of type T, containing the values to update.
    * @returns The updated object or null if id not found.
    */
-  updateOne(id: string, values: Partial<T>): Promise<T | null>;
+  updateOne(id: string, values: Partial<T>): Promise<T | null> | Promise<T>;
 }

@@ -5,5 +5,5 @@ export interface IFindByIdHandler<T> {
    * @param id A valid object id.
    * @returns The object with "id" or null if not found.
    */
-  findById(id: string): Promise<T | null>;
+  findById(id: string): Promise<T | null> | Promise<T>;
 }

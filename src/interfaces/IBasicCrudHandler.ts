@@ -4,6 +4,7 @@ import { IFindAllHandler } from './CRUD Handlers/IFindAllHandler';
 import { IFindByIdHandler } from './CRUD Handlers/IFindByIdHandler';
 import { IUpdateOneHandler } from './CRUD Handlers/IUpdateOneHandler';
 
+// This interface is just for organization.
 /**
  * Generic interface that condenses all basic CRUD handling interfaces.
  */

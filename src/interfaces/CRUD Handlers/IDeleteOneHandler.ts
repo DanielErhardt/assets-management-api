@@ -5,5 +5,5 @@ export interface IDeleteOneHandler<T> {
    * @param id A valid object id.
    * @returns A copy of the deleted object or null if id not found.
    */
-  deleteOne(id: string): Promise<T | null>;
+  deleteOne(id: string): Promise<T | null> | Promise<T>;
 }
