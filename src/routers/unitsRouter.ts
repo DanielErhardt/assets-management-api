@@ -1,19 +1,22 @@
 import { Router } from 'express';
+import UnitController from '../controllers/UnitController';
 
 const unitsRouter = Router();
 
-unitsRouter.post('/');
+const controller = new UnitController();
 
-unitsRouter.get('/');
+unitsRouter.post('/', controller.create);
 
-unitsRouter.get('/:id');
+unitsRouter.get('/', controller.findAll);
 
-unitsRouter.patch('/assignAsset/:assetId');
+unitsRouter.get('/:id', controller.findById);
 
-unitsRouter.patch('/removeAsset/:assetId');
+unitsRouter.patch(':id/assets/add/:assetId', controller.addAsset);
 
-unitsRouter.put('/:id');
+unitsRouter.patch(':id/assets/remove/:assetId', controller.removeAsset);
 
-unitsRouter.delete('/:id');
+unitsRouter.put('/:id', controller.updateOne);
+
+unitsRouter.delete('/:id', controller.deleteOne);
 
 export default unitsRouter;
