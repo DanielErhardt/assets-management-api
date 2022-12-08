@@ -1,8 +1,4 @@
 import { z } from 'zod';
-
-export const credentialsZodType = z.object({
-  email: z.string().email(),
-  password: z.string(),
-});
+import { credentialsZodType } from './ZodTypes';
 
 export type Credentials = z.infer<typeof credentialsZodType>;

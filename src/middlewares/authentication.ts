@@ -1,7 +1,8 @@
 import { NextFunction, Request, RequestHandler } from 'express';
-import { UserRole } from '../@types/UserRole';
 import RequestError from '../utils/RequestError';
 import Token from '../utils/Token';
+
+export type UserRole = 'user' | 'manager' | 'admin';
 
 const getAccessLevel = (role: UserRole): number => {
   const level = { user: 1, manager: 2, admin: 3 };

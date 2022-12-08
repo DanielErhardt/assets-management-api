@@ -1,5 +1,5 @@
 import { ObjectId, Schema } from 'mongoose';
-import { Asset } from '../../@types/Entities/Asset';
+import { Asset } from '../../@types/Entities';
 
 type SchemaCompatibleAsset = Omit<Asset, 'owner'> & {
   owner: ObjectId;

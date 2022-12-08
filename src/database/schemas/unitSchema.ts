@@ -1,5 +1,5 @@
 import { ObjectId, Schema } from 'mongoose';
-import { Unit } from '../../@types/Entities/Unit';
+import { Unit } from '../../@types/Entities';
 
 type SchemaCompatibleUnit = Omit<Unit, 'owner' | 'assets'> & {
   assets: ObjectId[];
