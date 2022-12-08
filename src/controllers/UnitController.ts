@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { RequestHandler } from 'express';
 import codes from 'http-status-codes';
 import { Unit } from '../@types/Entities';
 import UnitService from '../services/UnitService';
@@ -12,17 +12,17 @@ class UnitController extends Controller<Unit> {
     this._service = service;
   }
 
-  async addAsset(req: Request, res: Response): Promise<Response> {
+  addAsset: RequestHandler = async (req, res) => {
     const { params: { id, assetId } } = req;
     const unit = await this._service.addAsset(id, assetId);
-    return res.status(codes.OK).json({ assets: unit.assets });
-  }
+    res.status(codes.OK).json({ assets: unit.assets });
+  };
 
-  async removeAsset(req: Request, res: Response): Promise<Response> {
+  removeAsset: RequestHandler = async (req, res) => {
     const { params: { id, assetId } } = req;
     const unit = await this._service.removeAsset(id, assetId);
-    return res.status(codes.OK).json({ assets: unit.assets });
-  }
+    res.status(codes.OK).json({ assets: unit.assets });
+  };
 }
 
 export default UnitController;

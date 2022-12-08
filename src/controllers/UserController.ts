@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { RequestHandler } from 'express';
 import codes from 'http-status-codes';
 import { Credentials } from '../@types/Credentials';
 import { User } from '../@types/Entities';
@@ -14,17 +14,17 @@ class UserController extends Controller<User> {
     this._service = service;
   }
 
-  async login(req: Request, res: Response): Promise<Response> {
+  login: RequestHandler = async (req, res) => {
     const { body } = req;
     const token = await this._service.login(body as Credentials);
-    return res.status(codes.OK).json({ token });
-  }
+    res.status(codes.OK).json({ token });
+  };
 
-  async assignRole(req: Request, res: Response): Promise<Response> {
+  assignRole: RequestHandler = async (req, res) => {
     const { params: { id, newRole } } = req;
     const user = await this._service.assignRole(id, newRole as UserRole);
-    return res.status(codes.OK).json({ message: `Successfully assigned role ${newRole} to ${user.name}` });
-  }
+    res.status(codes.OK).json({ message: `Successfully assigned role ${newRole} to ${user.name}` });
+  };
 }
 
 export default UserController;
