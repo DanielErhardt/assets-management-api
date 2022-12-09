@@ -20,10 +20,11 @@ class UserModel extends Model<User> {
    * @param email The user's email.
    * @returns The user with the passed email. Null if no user found.
    */
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string, login = false): Promise<User | null> {
+    const select = login ? '+password' : '';
     const found = await this._model.findOne({ email })
       .populate(this._populate)
-      .select('__v');
+      .select(select);
 
     return found as User | null;
   }
