@@ -36,16 +36,21 @@ class UserService extends Service<User> {
   async login(credentials: Credentials): Promise<string> {
     const { password, email } = credentials;
 
-    const user = await this._model.findByEmail(email);
+    const user = await this._model.findByEmail(email, true);
+
     if (!user) throw RequestError.notFound(`User with email ${credentials.email} not found.`);
 
     const { password: hash } = user;
 
-    if (!BCrypt.validate(password, hash as string)) {
+    if (!BCrypt.validate(password as string, hash as string)) {
       throw RequestError.unauthorized('Invalid password');
     }
 
-    return Token.create(user);
+    return Token.create({
+      id: user._id,
+      role: user.role,
+      company: user.company,
+    });
   }
 
   async assignRole(id: string, role: UserRole): Promise<User> {
