@@ -15,9 +15,9 @@ usersRouter.get('/', auth.manager, controller.findAll);
 
 usersRouter.get('/:id', auth.manager, controller.findById);
 
-usersRouter.patch('/:id/role/:newRole', auth.manager, controller.assignRole);
+usersRouter.patch('/:id/role/:newRole', auth.admin, controller.assignRole);
 
-usersRouter.put('/:id', auth.manager, controller.updateOne);
+usersRouter.put('/:id', auth.admin, controller.updateOne);
 
 usersRouter.delete('/:id', auth.admin, controller.deleteOne);
 
