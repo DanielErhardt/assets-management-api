@@ -1,4 +1,6 @@
 # TRACTIAN Challenge
+## Objective
+- Build a CRUD where the user can register companies, units, assets and users.
 
 ## [Architecture](#architecture)<br/>
 
@@ -8,7 +10,7 @@
 [Input Data Strict Validation](#input-data-strict-validation)<br/>
 [Global Error Handling](#global-error-handling)<br/>
 [Complete Database Abstraction](#complete-database-abstraction)<br/>
-[Documents Automatic Archivation](#documents-automatic-archivation)<br/>
+[Automatic Document Archivation](#automatic-document-archivation)<br/>
 [MongoDB Entities Association](#mongodb-entities-association)<br/>
 
 ## [Endpoints](#endpoints)<br/>
