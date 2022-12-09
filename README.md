@@ -24,6 +24,7 @@
 
 ## [Final Observations](#final-observations)<br/>
 
+[Environment Variables](#--environment-variables) <br/>
 [MongoDB Associations and Database Integrity](#--mongodb-associations-and-database-integrity)<br/>
 [Archive Search](#--archive-search)<br/>
 [User Company Matching](#--user-company-matching)<br/>
@@ -147,16 +148,17 @@ Make sure you have Node, Docker and docker-compose installed. Then access the ro
 ```
 npm i
 ```
-- To run the application:
-
-```
-npm start
-```
 
 - To install the docker containers:
 
 ```
 npm run compose:up
+```
+
+- To run the application:
+
+```
+npm start
 ```
 
 - To populate the database:
@@ -185,11 +187,15 @@ Now you can test the application with a client of your liking. Login with email 
 I am aware of many things I could have done to make this API a lot better, improving its maintainability and integrity, but some of these things would have to be implemented more carefully in order to avoid unnecessary complexity and dependency cycles. Unfortunately, there was not enough time. I listed some of those things below. <br/>
 **Please, note that I actually have the knowledge on how to implement most of these features.**
 
+### - Environment Variables
+
+Those should never be stored somewhere with easy access, as it could pose a serious threat to the company. This repository is just for demonstration purposes, so having the .env file publicly accessible is fine.
+
 ### - MongoDB Associations and Database Integrity
 
 It is necessary to make verifications during database manipulation to maintain its integrity and organization. <br/>
 In the current state, users can add non-existing ids as references for association, and it would go through without any resistance, as long as they are valid instances of the MongoDB ObjectId. <br/>
-The same goes for documents deletion. If a deleted document is referenced by another entity, this entity will still make reference to it. It would be ideal to completely disassociate it from other documents.
+The same goes for documents deletion. If a deleted document is referenced by another entity, this entity will still reference it. It would be ideal to completely disassociate it from other documents.
 
 ### - Archive Search
 
