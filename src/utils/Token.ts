@@ -1,6 +1,7 @@
 import {
   sign, verify, SignOptions, JwtPayload,
 } from 'jsonwebtoken';
+import 'dotenv/config';
 
 class Token {
   private static secret = process.env.JWT_SECRET as string;
