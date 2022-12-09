@@ -1,9 +1,10 @@
 import { User } from '../../@types/Entities';
+import { IUserModel } from '../../interfaces/IUserModel';
 import userSchema from '../schemas/userSchema';
 import Model from './Model';
 
-class UserModel extends Model<User> {
-  protected _populate = '';
+class UserModel extends Model<User> implements IUserModel<User> {
+  protected _populate = 'company';
   constructor() {
     super('User', userSchema);
   }

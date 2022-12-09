@@ -1,9 +1,8 @@
 import { Entity } from '../@types/Entities';
 import Model from '../database/models/Model';
-import { IBasicCrudHandler } from '../interfaces/IBasicCrudHandler';
 import RequestError from '../utils/RequestError';
 
-abstract class Service<T extends Entity> implements IBasicCrudHandler<T> {
+abstract class Service<T extends Entity> {
   protected abstract _model: Model<T>;
 
   /**

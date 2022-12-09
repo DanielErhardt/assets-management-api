@@ -1,9 +1,10 @@
 import { Company } from '../../@types/Entities';
+import { ICompanyModel } from '../../interfaces/ICompanyModel';
 import companySchema from '../schemas/companySchema';
 import Model from './Model';
 
-class CompanyModel extends Model<Company> {
-  protected _populate = '';
+class CompanyModel extends Model<Company> implements ICompanyModel<Company> {
+  protected _populate = 'employees assets units';
 
   constructor() {
     super('Company', companySchema);

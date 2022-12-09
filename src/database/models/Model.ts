@@ -1,9 +1,9 @@
 import { model, Schema } from 'mongoose';
-import { IBasicCrudHandler } from '../../interfaces/IBasicCrudHandler';
+import { IModel } from '../../interfaces/IModel';
 import { Entity, Archive } from '../../@types/Entities';
 import archiveSchema from '../schemas/archiveSchema';
 
-abstract class Model<T extends Entity> implements IBasicCrudHandler<T> {
+abstract class Model<T extends Entity> implements IModel<T> {
   protected abstract _populate: string;
   private _archive;
   protected _model;
@@ -20,16 +20,14 @@ abstract class Model<T extends Entity> implements IBasicCrudHandler<T> {
 
   async findById(id: string): Promise<T | null> {
     const found = await this._model.findById(id)
-      .populate(this._populate)
-      .select('-__v');
+      .populate(this._populate);
 
     return found as T;
   }
 
   async findAll(): Promise<T[]> {
     const all = await this._model.find()
-      .populate(this._populate)
-      .select('-__v');
+      .populate(this._populate);
 
     return all as T[];
   }
@@ -39,7 +37,7 @@ abstract class Model<T extends Entity> implements IBasicCrudHandler<T> {
       id,
       values,
       { new: true },
-    ).select('__v');
+    );
 
     await updated?.populate(this._populate);
 
