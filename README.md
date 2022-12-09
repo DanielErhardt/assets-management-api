@@ -2,9 +2,9 @@
 ## Objective
 - Build a CRUD where the user can register companies, units, assets and users.
 
-## [Architecture](#architecture)<br/>
+## [Architecture](#architecture-1)<br/>
 
-## [Features](#features)<br/>
+## [Features](#features-1)<br/>
 
 [Role-Specific Authentication](#--role-specific-authentication)<br/>
 [Input Data Strict Validation](#--input-data-strict-validation)<br/>
@@ -13,16 +13,16 @@
 [Automatic Document Archivation](#--automatic-document-archivation)<br/>
 [MongoDB Entities Association](#--mongodb-entities-association)<br/>
 
-## [Endpoints](#endpoints)<br/>
+## [Endpoints](#endpoints-1)<br/>
 
 [Users](#users)<br/>
 [Assets](#assets)<br/>
 [Units](#units)<br/>
 [Companies](#companies)<br/>
 
-## [Running the Application Locally](#running-the-application-locally)<br/>
+## [Running the Application Locally](#running-the-application-locally-1)<br/>
 
-## [Final Observations](#final-observations)<br/>
+## [Final Observations](#final-observations-1)<br/>
 
 [Environment Variables](#--environment-variables) <br/>
 [MongoDB Associations and Database Integrity](#--mongodb-associations-and-database-integrity)<br/>
