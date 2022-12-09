@@ -17,7 +17,7 @@ const auth = (req: Request, next: NextFunction, requiredRole: UserRole) => {
 
   if (!role) throw RequestError.badRequest('Token has no role assigned to it.');
 
-  const granted = (getAccessLevel(requiredRole) - getAccessLevel(role)) >= 0;
+  const granted = (getAccessLevel(role) - getAccessLevel(requiredRole)) >= 0;
 
   if (!granted) throw RequestError.unauthorized(`This route requires ${requiredRole} role.`);
 
