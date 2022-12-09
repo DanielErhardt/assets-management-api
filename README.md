@@ -144,31 +144,26 @@ You can also populate multiple fields at the same time. The Company model is ass
 Make sure you have Node, Docker and docker-compose installed. Then access the root directory of the project through the terminal and execute the following commands.
 
 - Install the dependencies:
-
 ```
 npm i
 ```
 
 - To install the docker containers:
-
 ```
 npm run compose:up
 ```
 
-- To run the application:
-
-```
-npm start
-```
-
 - To populate the database:
-
 ```
 npm run db:seed
 ```
 
-- To remove the docker containers when you are done:
+- To run the application:
+```
+npm start
+```
 
+- To remove the docker containers when you are done:
 ```
 npm run compose:down
 ```
