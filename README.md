@@ -1,5 +1,32 @@
 # TRACTIAN Challenge
 
+## [Architecture](#architecture)<br/>
+
+## [Features](#features)<br/>
+
+[Role-Specific Authentication](#role-specific-authentication)<br/>
+[Input Data Strict Validation](#input-data-strict-validation)<br/>
+[Global Error Handling](#global-error-handling)<br/>
+[Complete Database Abstraction](#complete-database-abstraction)<br/>
+[Documents Automatic Archivation](#documents-automatic-archivation)<br/>
+[MongoDB Entities Association](#mongodb-entities-association)<br/>
+
+## [Endpoints](#endpoints)<br/>
+
+[Users](#users)<br/>
+[Assets](#assets)<br/>
+[Units](#units)<br/>
+[Companies](#companies)<br/>
+
+## [Running the Application Locally](#running-the-application-locally)<br/>
+
+## [Final Observations](#final-observations)<br/>
+
+[MongoDB Associations and Database Integrity](#mongodb-associations-and-database-integrity)<br/>
+[Archive Search](#archive-search)<br/>
+[User Company Matching](#user-company-matching)<br/>
+[Clean Code / Clean Architecture](#clean-code--clean-architecture)<br/>
+
 ## Tools
 
 - NodeJS
@@ -37,11 +64,11 @@ This is done with the 'express-async-errors' package. It encapsulates the whole 
 
 The Model layer is built in a way that completely abstracts MongoDB from the rest of the API. As long as it's classes correctly implement the Model interfaces, everything should keep working just fine, even after a database migration to a completely different one.
 
-### Documents Automatic Archivation
+### Automatic Document Archivation
 
 Its not always a good thing to lose data forever, even when its intentional. <br/>
 In this API, when a document is deleted from it's original collection its then saved in a Archive collection, where it will no longer be available for consultation by common requests. This way, old data is not lost forever and can be consulted by database admins should it become necessary. <br/>
-For testing this, follow the Running the Application Locally instructions, create and delete some documents, then go to http://localhost:8081/ to open Mongo Express.<br/>
+For testing this, follow the [Running the Application Locally](#running-the-application-locally) instructions, create and delete some documents, then go to http://localhost:8081/ to open Mongo Express.<br/>
 The username and password are both "admin".<br/>
 Open the TractianDB database. You will find an "archives" collection, where you have access to all deleted documents.
 
@@ -111,12 +138,41 @@ You can also populate multiple fields at the same time. The Company model is ass
 
 ## Running the Application Locally
 
+Make sure you have Node, Docker and docker-compose installed. Then access the root directory of the project through the terminal and execute the following commands.
+
+- To install the docker containers:
+
+```
+npm run compose:up
+```
+
+- To populate the database:
+
+```
+npm run db:seed
+```
+
+- To remove the docker containers when you are done:
+
+```
+npm run compose:down
+```
+
+Now you can test the application with a client of your liking. Login with email and password of one of the users below and generate a token for testing. Use the POST /users/login route with a body containing the login info.
+
+| User           | Email                      | Password           | Role    |
+| -------------- | -------------------------- | ------------------ | ------- |
+| Juvenal        | juvenal@tractian.com       | data-grandmaster   | admin   |
+| João das Neves | joao@freiossupremos.com    | sabe-nada          | user    |
+| Emerson        | emerson@freiossupremos.com | emersinho-gerente  | manager |
+| Roberta        | roberta@freiossupremos.com | robertinha-gerente | manager |
+
 ## Final Observations
 
 I am aware of many things I could have done to make this API a lot better, improving its maintainability and integrity, but some of these things would have to be implemented more carefully in order to avoid unnecessary complexity and dependency cycles. Unfortunately, there was not enough time. I listed some of those things below. <br/>
 **Please, note that I actually have the knowledge on how to implement most of these features.**
 
-### MongoDB Associated Documents
+### MongoDB Associations and Database Integrity
 
 It is necessary to make verifications during database manipulation to maintain its integrity and organization. <br/>
 In the current state, users can add non-existing ids as references for association, and it would go through without any resistance, as long as they are valid instances of the MongoDB ObjectId. <br/>
