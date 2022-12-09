@@ -14,7 +14,7 @@ const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
   if (error instanceof ZodError) {
     const { issues: details } = error;
     return res.status(codes.BAD_REQUEST).json({
-      message: 'Request body is invalid. Please, see details property for more info.',
+      message: 'Request has invalid inputs. Please, see details property for more info.',
       details,
     });
   }

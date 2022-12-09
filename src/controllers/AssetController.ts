@@ -16,13 +16,13 @@ class AssetController extends Controller<Asset> {
   getStatus: RequestHandler = async (req, res) => {
     const { params: { id } } = req;
     const status = await this._service.getStatus(id);
-    res.status(codes.OK).json(status);
+    res.status(codes.OK).json({ status });
   };
 
   getHealth: RequestHandler = async (req, res) => {
     const { params: { id } } = req;
     const health = await this._service.getHealth(id);
-    res.status(codes.OK).json(health);
+    res.status(codes.OK).json({ health });
   };
 
   setHealth: RequestHandler = async (req, res) => {
