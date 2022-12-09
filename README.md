@@ -145,6 +145,11 @@ Make sure you have Node, Docker and docker-compose installed. Then access the ro
 ```
 npm i
 ```
+- To run the application:
+
+```
+npm start
+```
 
 - To install the docker containers:
 
