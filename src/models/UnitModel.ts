@@ -1,6 +1,6 @@
-import { Unit } from '../../@types/Entities';
-import { IUnitModel } from '../../interfaces/IUnitModel';
-import unitSchema from '../schemas/unitSchema';
+import { Unit } from '../@types/Entities';
+import { IUnitModel } from '../interfaces/IUnitModel';
+import unitSchema from '../database/schemas/unitSchema';
 import Model from './Model';
 
 class UnitModel extends Model<Unit> implements IUnitModel<Unit> {

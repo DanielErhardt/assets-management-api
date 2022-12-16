@@ -1,6 +1,6 @@
-import { User } from '../../@types/Entities';
-import { IUserModel } from '../../interfaces/IUserModel';
-import userSchema from '../schemas/userSchema';
+import { User } from '../@types/Entities';
+import { IUserModel } from '../interfaces/IUserModel';
+import userSchema from '../database/schemas/userSchema';
 import Model from './Model';
 
 class UserModel extends Model<User> implements IUserModel<User> {

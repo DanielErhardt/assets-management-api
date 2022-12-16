@@ -1,6 +1,6 @@
-import { Company } from '../../@types/Entities';
-import { ICompanyModel } from '../../interfaces/ICompanyModel';
-import companySchema from '../schemas/companySchema';
+import { Company } from '../@types/Entities';
+import { ICompanyModel } from '../interfaces/ICompanyModel';
+import companySchema from '../database/schemas/companySchema';
 import Model from './Model';
 
 class CompanyModel extends Model<Company> implements ICompanyModel<Company> {

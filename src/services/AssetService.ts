@@ -1,6 +1,6 @@
 import { AssetStatus } from '../@types/AssetStatus';
 import { Asset } from '../@types/Entities';
-import AssetModel from '../database/models/AssetModel';
+import AssetModel from '../models/AssetModel';
 import Service from './Service';
 
 class AssetService extends Service<Asset> {

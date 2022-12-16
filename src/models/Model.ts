@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { IModel } from '../../interfaces/IModel';
-import { Entity, Archive } from '../../@types/Entities';
-import archiveSchema from '../schemas/archiveSchema';
+import { IModel } from '../interfaces/IModel';
+import { Entity, Archive } from '../@types/Entities';
+import archiveSchema from '../database/schemas/archiveSchema';
 
 abstract class Model<T extends Entity> implements IModel<T> {
   protected abstract _populate: string;
