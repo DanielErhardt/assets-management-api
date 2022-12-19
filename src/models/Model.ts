@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { Model as MongoModel } from 'mongoose';
 import { IModel } from '../interfaces/IModel';
 import { Entity, Archive } from '../@types/Entities';
 import archiveSchema from '../database/schemas/archiveSchema';
@@ -8,9 +8,8 @@ abstract class Model<T extends Entity> implements IModel<T> {
   private _archive;
   protected _model;
 
-  constructor(entityName: string, schema: Schema) {
-    this._model = model(entityName, schema);
-    this._archive = model('Archive', archiveSchema);
+  constructor(model: MongoModel<T>) {
+    this._model = model;
   }
 
   async createOne(object: T): Promise<T> {
