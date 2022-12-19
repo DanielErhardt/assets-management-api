@@ -1,11 +1,7 @@
-import { ObjectId, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { User } from '../../@types/Entities';
 
-type SchemaCompatibleUser = Omit<User, 'company'> & {
-  company: ObjectId;
-};
-
-const userSchema = new Schema<SchemaCompatibleUser>({
+const userSchema = new Schema<User>({
   name: {
     type: String,
     required: [true, 'User name is required.'],
