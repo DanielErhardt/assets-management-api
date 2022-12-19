@@ -1,13 +1,13 @@
-import { Asset } from '../@types/Entities';
+import { Asset as AssetType } from '../@types/Entities';
 import { IAssetModel } from '../interfaces/IAssetModel';
-import assetSchema from '../database/schemas/assetSchema';
 import Model from './Model';
+import { Asset } from '../database/models';
 
-class AssetModel extends Model<Asset> implements IAssetModel<Asset> {
+class AssetModel extends Model<AssetType> implements IAssetModel<AssetType> {
   protected _populate = 'owner';
 
   constructor() {
-    super('Asset', assetSchema);
+    super(Asset);
   }
 }
 

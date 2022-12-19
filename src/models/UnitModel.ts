@@ -1,16 +1,16 @@
-import { Unit } from '../@types/Entities';
+import { Unit as UnitType } from '../@types/Entities';
 import { IUnitModel } from '../interfaces/IUnitModel';
-import unitSchema from '../database/schemas/unitSchema';
 import Model from './Model';
+import { Unit } from '../database/models';
 
-class UnitModel extends Model<Unit> implements IUnitModel<Unit> {
+class UnitModel extends Model<UnitType> implements IUnitModel<UnitType> {
   protected _populate = 'owner assets';
 
   constructor() {
-    super('Unit', unitSchema);
+    super(Unit);
   }
 
-  async editAssetList(id: string, assetId: string, add: boolean): Promise<Unit | null> {
+  async editAssetList(id: string, assetId: string, add: boolean): Promise<UnitType | null> {
     const edited = add
       ? await this._model.findByIdAndUpdate(id, {
         $push: { assets: assetId },
@@ -19,7 +19,7 @@ class UnitModel extends Model<Unit> implements IUnitModel<Unit> {
         $pull: { assets: assetId },
       }, { new: true });
 
-    return edited?.toObject() as Unit;
+    return edited?.toObject() as UnitType;
   }
 }
 
