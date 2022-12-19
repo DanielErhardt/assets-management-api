@@ -1,11 +1,10 @@
 import { Model as MongoModel } from 'mongoose';
 import { IModel } from '../interfaces/IModel';
-import { Entity, Archive } from '../@types/Entities';
-import archiveSchema from '../database/schemas/archiveSchema';
+import { Entity, Archive as ArchiveType } from '../@types/Entities';
+import { Archive } from '../database/models';
 
 abstract class Model<T extends Entity> implements IModel<T> {
   protected abstract _populate: string;
-  private _archive;
   protected _model;
 
   constructor(model: MongoModel<T>) {
@@ -50,12 +49,12 @@ abstract class Model<T extends Entity> implements IModel<T> {
 
     // This saves the object in an archive that is only accessible by the database admins.
     // With this, data is not lost forever and can be consulted if necessary.
-    const archived: Archive = {
+    const archived: ArchiveType = {
       collectionName: this._model.collection.collectionName,
       document: deleted,
     };
 
-    await this._archive.create(archived);
+    await Archive.create(archived);
 
     return deleted as T;
   }
