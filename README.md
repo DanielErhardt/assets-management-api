@@ -1,4 +1,3 @@
-# TRACTIAN Challenge :billed_cap:
 ## Objective
 - Build a CRUD where the user can register companies, units, assets and users.
 
