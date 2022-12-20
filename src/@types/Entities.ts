@@ -6,12 +6,23 @@ import {
 
 export type Entity = z.infer<typeof entityZodType>;
 
-export type User = z.infer<typeof userZodType>;
+export type User = Omit<z.infer<typeof userZodType>, 'company'> & {
+  company: string | Record<string, unknown>;
+};
 
-export type Company = z.infer<typeof companyZodType>;
+export type Company = Omit<z.infer<typeof companyZodType>, 'employees' | 'assets' | 'units'> & {
+  employees: string[] | Record<string, unknown>[];
+  assets: string[] | Record<string, unknown>[];
+  units: string[] | Record<string, unknown>[];
+};
 
-export type Unit = z.infer<typeof unitZodType>;
+export type Unit = Omit<z.infer<typeof unitZodType>, 'assets' | 'owner'> & {
+  assets: string[] | Record<string, unknown>[];
+  owner: string | Record<string, unknown>;
+};
 
-export type Asset = z.infer<typeof assetZodType>;
+export type Asset = Omit<z.infer<typeof assetZodType>, 'owner'> & {
+  owner: string | Record<string, unknown>;
+};
 
 export type Archive = z.infer<typeof archiveZodType>;

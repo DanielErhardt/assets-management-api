@@ -1,13 +1,7 @@
-import { ObjectId, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { Company } from '../../@types/Entities';
 
-type SchemaCompatibleCompany = Omit<Company, 'assets' | 'employees' | 'units'> & {
-  assets: ObjectId[];
-  employees: ObjectId[];
-  units: ObjectId[];
-};
-
-const companySchema = new Schema<SchemaCompatibleCompany>({
+const companySchema = new Schema<Company>({
   name: {
     type: String,
     required: [true, 'Company name field is required.'],

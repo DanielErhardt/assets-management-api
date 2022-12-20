@@ -1,12 +1,7 @@
-import { ObjectId, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { Unit } from '../../@types/Entities';
 
-type SchemaCompatibleUnit = Omit<Unit, 'owner' | 'assets'> & {
-  assets: ObjectId[];
-  owner: ObjectId;
-};
-
-const unitSchema = new Schema<SchemaCompatibleUnit>({
+const unitSchema = new Schema<Unit>({
   name: {
     type: String,
     required: [true, 'Unit name field is required.'],

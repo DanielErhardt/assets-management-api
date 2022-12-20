@@ -1,11 +1,7 @@
-import { ObjectId, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { Asset } from '../../@types/Entities';
 
-type SchemaCompatibleAsset = Omit<Asset, 'owner'> & {
-  owner: ObjectId;
-};
-
-const assetSchema = new Schema<SchemaCompatibleAsset>({
+const assetSchema = new Schema<Asset>({
   name: {
     type: String,
     require: [true, 'Asset name field is required.'],

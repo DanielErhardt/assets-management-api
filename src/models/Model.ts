@@ -1,16 +1,14 @@
-import { model, Schema } from 'mongoose';
-import { IModel } from '../../interfaces/IModel';
-import { Entity, Archive } from '../../@types/Entities';
-import archiveSchema from '../schemas/archiveSchema';
+import { Model as MongoModel } from 'mongoose';
+import { IModel } from '../interfaces/IModel';
+import { Entity, Archive as ArchiveType } from '../@types/Entities';
+import { Archive } from '../database/models';
 
 abstract class Model<T extends Entity> implements IModel<T> {
   protected abstract _populate: string;
-  private _archive;
   protected _model;
 
-  constructor(entityName: string, schema: Schema) {
-    this._model = model(entityName, schema);
-    this._archive = model('Archive', archiveSchema);
+  constructor(model: MongoModel<T>) {
+    this._model = model;
   }
 
   async createOne(object: T): Promise<T> {
@@ -51,19 +49,14 @@ abstract class Model<T extends Entity> implements IModel<T> {
 
     // This saves the object in an archive that is only accessible by the database admins.
     // With this, data is not lost forever and can be consulted if necessary.
-    const archived: Archive = {
+    const archived: ArchiveType = {
       collectionName: this._model.collection.collectionName,
       document: deleted,
     };
 
-    await this._archive.create(archived);
+    await Archive.create(archived);
 
     return deleted as T;
-  }
-
-  async seed(objects: T[], reset = true): Promise<void> {
-    if (reset) await this._model.deleteMany();
-    await this._model.insertMany(objects);
   }
 }
 

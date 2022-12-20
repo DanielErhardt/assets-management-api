@@ -1,34 +1,28 @@
 /* eslint-disable no-console */
-import AssetModel from '../models/AssetModel';
-import CompanyModel from '../models/CompanyModel';
-import UnitModel from '../models/UnitModel';
-import UserModel from '../models/UserModel';
 import assets from './Assets';
 import companies from './Companies';
 import units from './Units';
 import users from './Users';
 import { connect, disconnect, MONGO_URI_DEV } from '..';
+import {
+  Asset, Company, User, Unit,
+} from '../models';
 
 const seed = async (mongoURI = MONGO_URI_DEV) => {
-  const userModel = new UserModel();
-  const companyModel = new CompanyModel();
-  const assetModel = new AssetModel();
-  const unitModel = new UnitModel();
-
   try {
     await connect(mongoURI);
 
     console.log('Seeding users collection.');
-    await userModel.seed(users);
+    await User.insertMany(users);
 
     console.log('Seeding companies collection.');
-    await companyModel.seed(companies);
+    await Company.insertMany(companies);
 
     console.log('Seeding assets collection.');
-    await assetModel.seed(assets);
+    await Asset.insertMany(assets);
 
     console.log('Seeding units collection.');
-    await unitModel.seed(units);
+    await Unit.insertMany(units);
 
     console.log('Database seeding completed successfully.');
     await disconnect();
